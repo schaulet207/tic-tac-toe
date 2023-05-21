@@ -143,27 +143,6 @@ div {
   color: var(--txt);
 }
 
-.main {
-    display: grid;
-    gap: 20px;
-    grid-area: 2 / 2 / 4 / 4;
-    grid-template: max-content / 1fr 300px;
-    margin-bottom: 50px;
-    padding: 20px;
-}
-
-.cards {
-    display: grid;
-    gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-auto-rows: max-content;
-}
-
-#mainlayout {
-    gap: 55px;
-    padding-left: 40px;
-}
-
 .info {
   display: flex;
   flex-direction: column;
@@ -468,4 +447,116 @@ h4{
 
 .bottom-border {
     color: white;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 4vh;
+    margin-top: 7vh;
+}
+
+#mainlayout {
+    gap: 55px;
+    padding-left: 40px;
+}
+
+#gameboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1px;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    background-color: #eee;
+}
+  
+.cell {
+    width: 164px;
+    height: 164px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    border: 1px solid var(--gray-bg);
+    cursor: pointer;
+    background-color: var(--dark-bg);
+    color: white;
+}
+
+.cell:hover {
+    background-color: var(--dark-txt);
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-width: 16vw;
+    max-width: 16vw;
+    font: var(--txt);
+    font-size: 20px;
+    background-color: var(--gray-bg);
+    color: var(--txt);
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: var(--txt);
+    font-size: 42px;
+    font-weight: bolder;
+}
+
+.input {
+    color: var(--txt);
+    height: 3vh;
+}
+
+#start-button {
+    background-color: #3498db;
+}
+
+#result {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 40px;
+    color: white;
+    font-size: 42px;
+}
+
+.buttons {
+    height: 5vh;
+}
+
+.buttons:hover {
+    cursor: pointer;
+}
+
+.sect-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2vw;
+    margin-bottom: 2vh;
+}
+
+.sect-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 2vw;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+::placeholder {
+    color: var(--txt);
 }
