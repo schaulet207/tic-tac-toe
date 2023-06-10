@@ -1,3 +1,30 @@
+
+  // Modal logic
+  // Get the modal element
+  var modal = document.getElementById("modal");
+
+  // Get the start button element
+  var startButton = document.getElementById("start-button");
+  
+  // Get the input field elements
+  var player1Input = document.getElementById("player1-name");
+  var player2Input = document.getElementById("player2-name");
+  
+  // Get the player name display elements
+  var player1Name = document.getElementById("player1");
+  var player2Name = document.getElementById("player2");  
+
+// Add click event listener to the start button
+startButton.addEventListener("click", function() {
+  // Update the innerHTML of player name display elements
+  player1Name.innerHTML = player1Input.value;
+  player2Name.innerHTML = player2Input.value;
+  let player1 = Player(player1Name.innerHTML, 'X');
+  let player2 = Player(player2Name.innerHTML, 'O');
+  // Hide the modal by adding a CSS class
+  modal.classList.add("hide");
+});
+
 // Gameboard module
 const Gameboard = (() => {
     let board = ['', '', '', '', '', '', '', '', ''];
@@ -36,8 +63,8 @@ const Gameboard = (() => {
   
   // Game module
   const Game = (() => {
-    const player1 = Player('Player 1', 'X');
-    const player2 = Player('Player 2', 'O');
+    let player1 = Player(player1Name, 'X');
+    let player2 = Player(player2Name, 'O');
     let currentPlayer = player1;
     let gameOver = false;
   
@@ -52,6 +79,7 @@ const Gameboard = (() => {
       if (Gameboard.updateBoard(cellIndex, currentPlayer.marker)) {
         renderBoard();
         if (checkForWin()) {
+          switchPlayer();
           displayResult(`${currentPlayer.name} wins!`);
           gameOver = true;
         } else if (checkForTie()) {
@@ -88,10 +116,12 @@ const Gameboard = (() => {
   
     const displayResult = (message) => {
       const resultElement = document.getElementById('result');
-      if (message.includes('wins')) {
-        const winningPlayer = currentPlayer === player1 ? player2 : player1;
-        resultElement.textContent = `${winningPlayer.name} wins!`;
-      } else {
+      if ((message.includes('wins')) && currentPlayer == player1) {
+        resultElement.textContent = `Player 2 wins!`;
+      } else if ((message.includes('wins')) && currentPlayer == player2) {
+        resultElement.textContent = `Player 1 wins!`;
+      }
+      else {
         resultElement.textContent = message;
       }
     };
@@ -104,8 +134,12 @@ const Gameboard = (() => {
     };
   
     const handleStartClick = () => {
-      getPlayerNames();
-      reset();
+        if (document.getElementById('player1-name').value === '' || document.getElementById('player2-name').value === '') {
+            alert('Please enter a name for each player.');
+            return;
+        }
+        getPlayerNames();
+        reset();
     };
   
     const handleResetClick = () => {
@@ -120,6 +154,7 @@ const Gameboard = (() => {
   
       const resetButton = document.getElementById('reset-button');
       resetButton.addEventListener('click', handleResetClick);
+
     };
   
     const reset = () => {
